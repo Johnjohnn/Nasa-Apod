@@ -1,4 +1,4 @@
-const resultsNava = document.getElementById('resultsNav');
+const resultsNav = document.getElementById('resultsNav');
 const favoritesNava = document.getElementById('favoritesNav');
 const imagesContainer = document.querySelector('.images-container');
 const saveConfirmed = document.querySelector('.save-confirmed');
