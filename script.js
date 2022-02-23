@@ -46,16 +46,17 @@ resultsArray.forEach((result) => {
     footer.classList.add('text-muted');
     // Date 
     const date = document.createElement('strong');
-    date.textContent = reuslts.date;
+    date.textContent = result.date;
     // Copyright
+    const copyrightResult = result.copyright === undefined ? '' : result.copyright;
     const copyright = document.createElement('span');
-    copyright.textContent= `${result.copyright}`
+    copyright.textContent= `${copyrightResult}`
     //Append
     footer.append(date,copyright);
-    cardBody.append(cardTitle, CardText, saveText, footer);
+    cardBody.append(cardTitle, saveText,CardText, footer);
     link.appendChild(image);
     card.append(link, cardBody);
-    console.log(card);
+    imagesContainer.appendChild(card);
 })
 }
 
