@@ -38,7 +38,7 @@ resultsArray.forEach((result) => {
     const saveText = document.createElement('p');
     saveText.classList.add('clickable');
     saveText.textContent = 'Add to Faborites';
-    saveText.onclick = `saveFaborite('${result.url}')`
+    saveText.setAttribute('onclick',`saveFaborite('${result.url}')` );
     // Card Text 
     const CardText = document.createElement('p');
     CardText.textContent = result.explanation;
@@ -79,7 +79,19 @@ async function getNasaPictures () {
 
 // Add result to faborites
 function saveFaborite (itemUrl) {
-    console.log(itemUrl)
+// Loop through Results Array to select Faborite
+resultsArray.forEach((item) => {
+    if (item.url.includes(itemUrl) && !Faborites[itemUrl]) {
+        Faborites [itemUrl] = item;
+        // show save confirmation for 2 seconds 
+        saveConfirmed.hidden = false;
+        setTimeout(() => {
+            saveConfirmed.hidden = true;
+        }, 2000);
+        // Set Faborites in localstorage 
+        localStorage.setItem('nasaFaborites', JSON.stringify(Faborites));
+    }
+})
 
 }
 // On load 
