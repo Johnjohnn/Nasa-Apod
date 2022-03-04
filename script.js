@@ -39,8 +39,10 @@ function createDOMNodes() {
         // Save Text 
         const saveText = document.createElement('p');
         saveText.classList.add('clickable');
-        saveText.textContent = 'Add to Faborites';
-        saveText.setAttribute('onclick',`saveFaborite('${result.url}')` );
+        if (page === 'results'){
+            saveText.textContent = 'Remove  Faborites';
+        saveText.setAttribute('onclick',`removeFaborite('${result.url}')` );
+        }
         // Card Text 
         const CardText = document.createElement('p');
         CardText.textContent = result.explanation;
@@ -62,15 +64,13 @@ function createDOMNodes() {
         imagesContainer.appendChild(card);
     })
 }
-function updateDOM() {
-
-}
  
 function updateDOM(page) {
 // Get Faborites from localstorage
 if (localStorage.getItem('nasaFaborite')) {
     favorites = JSON.parse(localStorage.getItem('nasaFaborites'))
-}
+}    
+   imagesContainer.textContent = "";
     createDOMNodes(page);
 }
 // Get 10 image from NASA API 
@@ -104,6 +104,16 @@ resultsArray.forEach((item) => {
     }
 })
 
+ }
+
+// Remove itm from Faborites 
+function removeFaborite(itemUrl) {
+    if (faborites[itemUrl]) {
+       delete faborites[itemUrl];
+      // Set Faborites in localStorage
+        localStorage.setItem('nasaFaborites', JSON.stringify(Faborites));  
+        updateDOM('faborites');
+    }
 }
 // On load 
 //getNasaPictures();
